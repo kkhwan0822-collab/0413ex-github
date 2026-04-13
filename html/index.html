@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강환님의 Git 연습 페이지</title>
+    <style>
+        /* 배경과 기본 폰트 설정 */
+        body {
+            background-color: #1a1a2e; /* 깊은 남색 배경 */
+            color: #ffffff; /* 하얀색 글자 */
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* 중앙 카드 스타일 */
+        .card {
+            background-color: #16213e; /* 카드 배경색 */
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 2px solid #0f3460;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px); /* 마우스 올리면 살짝 들림 */
+        }
+
+        /* 제목 스타일 */
+        h1 {
+            color: #e94560; /* 포인트 핑크색 */
+            margin-bottom: 10px;
+        }
+
+        /* 텍스트 스타일 */
+        p {
+            color: #95a5a6;
+            line-height: 1.6;
+        }
+
+        /* 버튼 스타일 */
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: #e94560;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ff2e63;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Git Push 성공! 🚀</h1>
+        <p>강환님, 오늘 정말 고생 많으셨습니다.<br>
+        s3와 github 배포</p>
+        <a href="#" class="btn" onclick="alert('완벽하게 마스터하셨습니다!')">축하 버튼</a>
+    </div>
+
+</body>
+</html>
