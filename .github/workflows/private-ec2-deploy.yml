@@ -33,7 +33,7 @@ jobs:
               --parameters "commands=[
                   \"sudo aws s3 sync s3://${{ secrets.S3_BUCKET_NAME }}/html/ /usr/share/nginx/html/ --delete\",
                   \"sudo chown -R ec2-user:nginx /usr/share/nginx/html/\",
-                  \"sudo systemctl reload nginx\"             
-              ]" \"
+                  \"sudo systemctl reload nginx\"            
+              ]" \
               --region ${{ secrets.AWS_REGION }} \
               --comment "Deploying website from S3 to EC2"
