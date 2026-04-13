@@ -1,0 +1,39 @@
+# name: 워커 플로우 이름
+# on:   브랜치명을 정의
+# jobs: 실행할 작업을 정의
+name:  Nginx Deployment SSM and S3
+on: 
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy: #배포정보
+    name: 배포 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: AWS 자격 확인
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
+      - name: S3 버킷으로 파일 업로드
+        run: |
+
+          aws s3 sync html/ s3://${{ secrets.S3_BUCKET_NAME }}/html/ --delete
+      - name: Deploy from S3 to EC2 using SSM
+        run: |
+          aws ssm send-command \
+              --instance-ids ${{ secrets.EC2_INSTANCE_ID }} \
+              --document-name "AWS-RunShellScript" \
+              --parameters "commands=[
+                  \"sudo aws s3 sync s3://${{ secrets.S3_BUCKET_NAME }}/html/ /usr/share/nginx/html/ --delete\",
+                  \"sudo chown -R ec2-user:nginx /usr/share/nginx/html/\",
+                  \"sudo systemctl reload nginx\"             
+              ]" \"
+              --region ${{ secrets.AWS_REGION }} \
+              --comment "Deploying website from S3 to EC2"
